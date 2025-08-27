@@ -1,6 +1,6 @@
 # Personal Trainer
 
-LP para um personal trainer 
+Landing Page (LP) para um personal trainer 
 
 projeto para aperfeiçoar as habilidades de web design
 
