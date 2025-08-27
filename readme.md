@@ -112,3 +112,56 @@ Você já publicou LPs assim? Posso te perguntar 2–3 pontos rápidos sobre mel
 - O script do GA4 com evento de click no WhatsApp?
 - Uma variação de hero (copy A/B) para você testar?
 - Manda a URL assim que publicar que eu destrincho os ajustes finos.
+
+#### robots.txt
+
+Esse arquivo diz aos buscadores o que eles podem ou não indexar.
+
+#### sitemap.xml
+
+Esse arquivo ajuda os buscadores a entender a estrutura da sua página.
+
+#### Script do GA4 com evento de clique no WhatsApp
+
+- Passo 1: Adicionar o GA4
+
+No <head> do seu index.html, adicione substituindo G-XXXXXXX pelo seu ID de medição:
+
+- Passo 2: Evento de clique no botão WhatsApp
+
+Logo antes do fechamento da tag <body>, adicione:
+
+#### Variação de Hero (copy A/B)
+
+A ideia é ter uma versão alternativa para testar qual copy converte melhor.
+- Original
+
+````html
+Transforme seu corpo com treinos personalizados e acompanhamento profissional.
+````
+- Variação A/B
+````html
+Resultados rápidos, treinos inteligentes: seu personal trainer online e acessível.
+````
+
+##### Como testar
+
+Duplique a seção <header> e crie uma classe hero-b para a variação.
+
+Com JavaScript, alterne entre hero-a e hero-b em cada atualização de página ou com uma porcentagem randômica.
+
+No GA4, crie um evento view_hero_ab para acompanhar impressões de cada versão.
+
+Exemplo rápido:
+
+
+**** PAREI AQUI
+
+Seguindo o IA no Chatgpt 00. meu mentor tech
+
+aqui:
+
+2. Script do GA4 com evento de clique no WhatsApp
+Passo 1: Adicionar o GA4
+
+No <head> do seu index.html, adicione substituindo G-XXXXXXX pelo seu ID de medição:

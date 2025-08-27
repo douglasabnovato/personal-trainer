@@ -294,7 +294,7 @@
     <script>
       // WhatsApp CTA helpers
       function openWhatsApp(message) {
-        const phone = "55XXXXXXXXXXX"; // Substitua pelo número com DDI e DDD
+        const phone = "5532988367667";
         const text = encodeURIComponent(message);
         const url = `https://wa.me/${phone}?text=${text}`;
         window.open(url, "_blank");
@@ -321,8 +321,53 @@
         }
       }
     </script>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-XXXXXXX");
+    </script>
   </head>
   <body>
+
+    <!--
+    Oririginal
+    -->
+    <header>
+      <div class="container nav">
+        <a class="brand" href="#">
+          <img
+            src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=256&q=80&auto=format&fit=crop"
+            alt="Logo Personal"
+          />
+          <span>Personal Trainer</span>
+        </a>
+        <nav style="display: flex; gap: 12px; align-items: center">
+          <a class="ghost" href="#servicos">Serviços</a>
+          <a class="ghost" href="#planos">Planos</a>
+          <a class="ghost" href="#contato">Contato</a>
+          <button
+            class="cta"
+            onclick="openWhatsApp('Olá! Quero saber mais sobre os treinos personalizados.')"
+          >
+            Fale no WhatsApp
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <!--
+    Teste AB
+    -->
+
+    
     <header>
       <div class="container nav">
         <a class="brand" href="#">
@@ -503,7 +548,7 @@
             gratuita.
           </p>
           <form
-            action="https://formspree.io/f/SEU_ENDPOINT"
+            action="https://formspree.io/f/xzzazdkp"
             method="POST"
             onsubmit="handleContact(event)"
           >
@@ -548,7 +593,7 @@
                 class="ghost"
                 href="#"
                 onclick="openWhatsApp('Olá! Vim do site e quero agendar minha avaliação.')"
-                >(00) 00000-0000</a
+                >(32) 98836-7667</a
               >
             </div>
             <div>
@@ -564,11 +609,14 @@
             <a class="ghost" href="https://instagram.com/" target="_blank"
               >Instagram</a
             >
-            <a class="ghost" href="https://www.linkedin.com/" target="_blank"
-              >LinkedIn</a
+            <a class="ghost" href="https://www.youtube.com/" target="_blank"
+              >Youtube</a
             >
-            <a class="ghost" href="https://github.com/" target="_blank"
-              >GitHub</a
+            <a
+              class="ghost"
+              href="https://https://www.facebook.com/"
+              target="_blank"
+              >Facebook</a
             >
           </div>
         </div>
@@ -631,6 +679,18 @@
           ]
         }
       }
+    </script>
+    <script>
+      document.querySelectorAll("a").forEach((link) => {
+        if (link.href.includes("wa.me")) {
+          link.addEventListener("click", () => {
+            gtag("event", "click_whatsapp", {
+              event_category: "engagement",
+              event_label: "WhatsApp CTA",
+            });
+          });
+        }
+      });
     </script>
   </body>
 </html>
