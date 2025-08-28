@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://SEU_DOMINIO.com/sitemap.xml
+Sitemap: https://douglasabnovato.github.io/personal-trainer/sitemap.xml

@@ -37,21 +37,36 @@ Ideal para personal trainers que querem uma solução direta, moderna e funciona
 ### Estrutura de pastas
 
 ```text
-personal-trainer/
+PERSONAL-TRAINER/
 │
-├── index.html         # Página principal
-├── favicon.ico        # Ícone do site
-├── og-image.jpg       # Imagem para compartilhamento social
-├── README.md          # Documentação do projeto
-├── css/               # (Opcional futuro) estilos separados
-│   └── style.css
-├── js/                # (Opcional futuro) scripts separados
-│   ├── analytics.js
-│   ├── ab-test.js
-│   ├── contact.js
-│   └── whatsapp.js
-└── assets/            # Imagens, logos, etc.
+├─ .github/                  # Configurações do GitHub (workflows, templates)
+├─ .history/                 # Histórico de arquivos (gerado pelo VSCode ou extensão)
+├─ assets/                   # Recursos estáticos
+│   ├─ icons/                # Ícones
+│   │   └─ logo.svg
+│   └─ imgs/                 # Imagens diversas do projeto
+├─ css/
+│   └─ style.css             # Estilos CSS da landing page
+├─ script/                   # Scripts JavaScript separados
+│   ├─ ab-test.js            # Teste A/B do hero
+│   ├─ analytics.js          # Configurações e eventos GA4
+│   ├─ contact.js            # Funções do formulário
+│   ├─ script.js             # Script principal / inicialização
+│   └─ whatsapp.js           # Funções do botão WhatsApp
+├─ .gitignore
+├─ index.html                # Página principal da LP
+├─ readme.md                 # Documentação do projeto
+├─ robots.txt                # Configurações de rastreamento para buscadores
+└─ sitemap.xml               # Sitemap para SEO
+
 ```
+
+### ✅ Benefícios dessa modularização
+
+- Manutenção facilitada: Cada script faz apenas uma coisa (Single Responsibility Principle).
+- Reuso: Você pode importar funções específicas em várias páginas ou componentes.
+- Leitura clara: Um dev novo consegue entender rapidamente qual arquivo mexer.
+- Escalabilidade: Se quiser adicionar testes A/B, GA4 ou WhatsApp avançado, só cria funções nesses módulos.
 
 ## Trechos de código importantes
 
@@ -178,6 +193,21 @@ document.querySelectorAll("a").forEach((link) => {
 - Persistência do teste A/B via localStorage
 - Variáveis globais para configuração (GA_ID, FORM_ENDPOINT, DOMAIN)
 - Sem dependências externas → performance otimizada
+
+### ✅ Imagens
+
+- unsplash : https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=256&q=80&auto=format&fit=crop
+- criando originais
+- criar logo
+- criar favicon
+- criar banners
+
+### ✅ Seções do site
+
+- home
+- serviços
+- planos
+- contato
 
 ### ⚡ Melhorias futuras
 
