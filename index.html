@@ -4,10 +4,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Personal Trainer | Resultados Reais</title>
-    <meta
-      name="description"
-      content="Acompanhamento de treino e nutrição com personal trainer. Planos personalizados, treinos presenciais e online."
-    />
     <meta name="color-scheme" content="light dark" />
     <!-- Open Graph -->
     <meta property="og:title" content="Personal Trainer | Resultados Reais" />
@@ -291,6 +287,29 @@
         }
       }
     </style>
+
+    <!-- Variáveis de configuração -->
+    <!-- Troque as variáveis abaixo -->
+    <script>
+      const VARS = {
+        GA_ID: "G-XXXXXXX", // ID do GA4
+        DOMAIN: "https://SEU_DOMINIO.com", // Domínio final
+        FORM_ENDPOINT: "https://formspree.io/f/SEU_ENDPOINT", // Endpoint do Formspree
+      };
+    </script>
+    <!-- Google Analytics 4 -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", VARS.GA_ID);
+    </script>
     <script>
       // WhatsApp CTA helpers
       function openWhatsApp(message) {
@@ -321,10 +340,11 @@
         }
       }
     </script>
+
     <!-- Google tag (gtag.js) -->
     <script
       async
-      src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"
+      src="https://www.googletagmanager.com/gtag/js?id=G-NK6ESCWPE8"
     ></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -332,11 +352,11 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-      gtag("config", "G-XXXXXXX");
+
+      gtag("config", "G-NK6ESCWPE8");
     </script>
   </head>
   <body>
-
     <!--
     Oririginal
     -->
@@ -366,8 +386,6 @@
     <!--
     Teste AB
     -->
-
-    
     <header>
       <div class="container nav">
         <a class="brand" href="#">
@@ -576,6 +594,11 @@
               ></textarea>
             </div>
             <button class="cta" type="submit">Enviar</button>
+            <input
+              type="hidden"
+              name="_redirect"
+              value="https://seusite.com/obrigado.html"
+            />
           </form>
         </div>
         <div class="card">
@@ -680,6 +703,7 @@
         }
       }
     </script>
+    <!-- EVENTO DE CLIQUE NO WHATSAPP -->
     <script>
       document.querySelectorAll("a").forEach((link) => {
         if (link.href.includes("wa.me")) {
@@ -690,6 +714,20 @@
             });
           });
         }
+      });
+    </script>
+    <!-- TESTE A/B DO HERO -->
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const hero = document.querySelector(".hero h1");
+        const variation = Math.random() > 0.5 ? "A" : "B";
+        if (variation === "B") {
+          hero.textContent =
+            "Resultados rápidos, treinos inteligentes: seu personal trainer online e acessível.";
+        }
+        gtag("event", "view_hero_ab", {
+          variation: variation,
+        });
       });
     </script>
   </body>

@@ -152,16 +152,4 @@ Com JavaScript, alterne entre hero-a e hero-b em cada atualização de página o
 
 No GA4, crie um evento view_hero_ab para acompanhar impressões de cada versão.
 
-Exemplo rápido:
-
-
-**** PAREI AQUI
-
-Seguindo o IA no Chatgpt 00. meu mentor tech
-
-aqui:
-
-2. Script do GA4 com evento de clique no WhatsApp
-Passo 1: Adicionar o GA4
-
-No <head> do seu index.html, adicione substituindo G-XXXXXXX pelo seu ID de medição:
+Exemplo rápido: 
