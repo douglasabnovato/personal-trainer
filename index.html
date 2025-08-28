@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
   <head>
-    <!-- Google tag (gtag.js)  -->
+    <!-- Google tag (gtag.js) - GA4 -->
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-NK6ESCWPE8"
@@ -667,66 +667,41 @@
         }
       });
     </script>
-    <!-- TESTE A/B DO HERO - versão corrigida e persistente -->
-    <!-- TESTE A/B DO HERO - CORRIGIDO E PERSISTENTE -->
+    <!-- TESTE A/B DO HERO -->
     <script>
-      (function () {
-        const KEY = "lp_hero_variant";
-        // Lê variação existente ou escolhe e persiste
-        let variant = null;
-        try {
-          variant = localStorage.getItem(KEY);
-        } catch (e) {
-          console.warn("localStorage não disponível", e);
-        }
+      document.addEventListener("DOMContentLoaded", function () {
+        const heroHeader = document.querySelector(".hero h1");
+        const variants = {
+          A: "Transforme seu corpo com um Personal Trainer dedicado",
+          B: "Alcance seus objetivos com treinos personalizados",
+        };
+
+        // Verifica se já existe uma variante salva no localStorage
+        let variant = localStorage.getItem("lp_hero_variant");
+
+        // Se não existe, sorteia A ou B e salva
         if (!variant) {
-          variant = Math.random() > 0.5 ? "B" : "A";
-          try {
-            localStorage.setItem(KEY, variant);
-          } catch (e) {
-            /* ignore */
-          }
+          variant = Math.random() < 0.5 ? "A" : "B";
+          localStorage.setItem("lp_hero_variant", variant);
         }
 
-        // DEBUG - remover em produção se quiser
-        console.info("[A/B] hero variant:", variant);
-
-        // Atualiza só o H1 dentro da .hero
-        const heroH1 = document.querySelector(".hero h1");
-        if (heroH1) {
-          if (variant === "B") {
-            heroH1.textContent =
-              "Resultados rápidos, treinos inteligentes: seu personal trainer online e acessível.";
-          } else {
-            // garante que A esteja no texto padrão (opcional)
-            // heroH1.textContent = 'Resultados reais com treinos personalizados';
-          }
-        } else {
-          console.warn("[A/B] .hero h1 não encontrado no DOM.");
+        // Aplica a variante no texto do Hero
+        if (heroHeader) {
+          heroHeader.textContent = variants[variant];
         }
 
-        // Envia evento ao GA uma única vez (se gtag existir)
+        // Dispara o evento para GA4 com a variação
         if (typeof gtag === "function") {
-          try {
-            gtag("event", "view_hero_ab", { variation: variant });
-          } catch (e) {
-            console.warn("[A/B] erro ao enviar evento gtag", e);
-          }
+          gtag("event", "view_hero_ab", {
+            variant: variant,
+          });
+          console.log(`GA4 A/B Test: Variante ${variant} enviada com sucesso`);
         } else {
-          // gtag pode ainda não estar pronto (por async); tentamos novamente em 500ms (1 tentativa)
-          setTimeout(() => {
-            if (typeof gtag === "function") {
-              try {
-                gtag("event", "view_hero_ab", { variation: variant });
-              } catch (e) {
-                console.warn("[A/B] retry gtag failed", e);
-              }
-            } else {
-              console.info("[A/B] gtag não disponível, evento não enviado.");
-            }
-          }, 500);
+          console.warn(
+            "GA4 não inicializado. Verifique seu ID no script do head."
+          );
         }
-      })();
+      });
     </script>
   </body>
 </html>
