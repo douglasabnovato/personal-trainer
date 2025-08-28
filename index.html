@@ -301,6 +301,39 @@
         }
       }
     </style>
+    <style>
+  /* Modal de sucesso */
+  #successModal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: grid;
+    place-items: center;
+    z-index: 100;
+  }
+  #successModal .card {
+    max-width: 400px;
+    text-align: center;
+    padding: 32px;
+    border-radius: 16px;
+    background: rgba(17,24,39,0.9);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+  #successModal .cta {
+    margin-top: 24px;
+    padding: 12px 20px;
+    border-radius: 999px;
+    background: #22c55e;
+    color: #0b141a;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+  #successModal .cta:hover {
+    background: #16a34a;
+  }
+</style>
 
     <script>
       // WhatsApp CTA helpers
@@ -511,47 +544,56 @@
     <section id="contato" class="section">
       <div class="container contact">
         <div class="card">
-          <h2>Fale comigo</h2>
-          <p class="muted">
-            Preencha o formulário ou chame no WhatsApp para uma avaliação
-            gratuita.
-          </p>
-          <form
-            action="https://formspree.io/f/xzzazdkp"
-            method="POST"
-            onsubmit="handleContact(event)"
-          >
-            <div>
-              <label for="nome">Nome</label>
-              <input id="nome" name="nome" required placeholder="Seu nome" />
-            </div>
-            <div>
-              <label for="email">Email</label>
-              <input
-                id="email"
-                type="email"
-                name="email"
-                required
-                placeholder="seu@email.com"
-              />
-            </div>
-            <div>
-              <label for="msg">Mensagem</label>
-              <textarea
-                id="msg"
-                name="mensagem"
-                rows="4"
-                placeholder="Conte seu objetivo"
-              ></textarea>
-            </div>
-            <button class="cta" type="submit">Enviar</button>
-            <input
-              type="hidden"
-              name="_redirect"
-              value="https://seusite.com/obrigado.html"
-            />
-          </form>
-        </div>
+  <h2>Fale comigo</h2>
+  <p class="muted">
+    Preencha o formulário ou chame no WhatsApp para uma avaliação gratuita.
+  </p>
+  <form
+    id="contactForm"
+    action="https://formspree.io/f/xzzazdkp"
+    method="POST"
+    onsubmit="handleContact(event)"
+  >
+    <div>
+      <label for="nome">Nome</label>
+      <input id="nome" name="nome" required placeholder="Seu nome" />
+    </div>
+    <div>
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        name="email"
+        required
+        placeholder="seu@email.com"
+      />
+    </div>
+    <div>
+      <label for="msg">Mensagem</label>
+      <textarea
+        id="msg"
+        name="mensagem"
+        rows="4"
+        placeholder="Conte seu objetivo"
+      ></textarea>
+    </div>
+    <button class="cta" type="submit">Enviar</button>
+    <input
+      type="hidden"
+      name="_redirect"
+      value="https://seusite.com/obrigado.html"
+    />
+  </form>
+</div>
+
+<!-- Modal de sucesso -->
+<div id="successModal" style="display:none;">
+  <div class="card">
+    <h2>✅ Obrigado!</h2>
+    <p>Sua mensagem foi enviada com sucesso. Entraremos em contato em breve.</p>
+    <button class="cta" onclick="closeModal()">Fechar</button>
+  </div>
+</div>
         <div class="card">
           <h3>Atendimentos</h3>
           <p class="muted">Presencial (Zona Sul) e online para todo Brasil.</p>
@@ -667,6 +709,36 @@
         }
       });
     </script>
+
+    <!-- Resposta do Form -->
+    <script>
+  async function handleContact(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    try {
+      const resp = await fetch(form.action, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: data,
+      });
+      if (resp.ok) {
+        form.reset();
+        document.getElementById("successModal").style.display = "grid";
+      } else {
+        alert("Não foi possível enviar. Tente pelo WhatsApp.");
+      }
+    } catch (err) {
+      alert("Erro de conexão. Tente novamente.");
+    }
+  }
+
+  function closeModal() {
+    document.getElementById("successModal").style.display = "none";
+  }
+</script>
+
+
     <!-- TESTE A/B DO HERO -->
     <script>
       document.addEventListener("DOMContentLoaded", function () {
