@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-  <head> 
-    <!-- Google tag (gtag.js) -->
+  <head>
+    <!-- Google tag (gtag.js)  -->
     <script
       async
       src="https://www.googletagmanager.com/gtag/js?id=G-NK6ESCWPE8"
@@ -302,28 +302,6 @@
       }
     </style>
 
-    <!-- Variáveis de configuração -->
-    <!-- Troque as variáveis abaixo -->
-    <script>
-      const VARS = {
-        GA_ID: "G-XXXXXXX", // ID do GA4
-        DOMAIN: "https://SEU_DOMINIO.com", // Domínio final
-        FORM_ENDPOINT: "https://formspree.io/f/SEU_ENDPOINT", // Endpoint do Formspree
-      };
-    </script>
-    <!-- Google Analytics 4 -->
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", VARS.GA_ID);
-    </script>
     <script>
       // WhatsApp CTA helpers
       function openWhatsApp(message) {
@@ -358,32 +336,6 @@
   <body>
     <!--
     Oririginal
-    -->
-    <header>
-      <div class="container nav">
-        <a class="brand" href="#">
-          <img
-            src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=256&q=80&auto=format&fit=crop"
-            alt="Logo Personal"
-          />
-          <span>Personal Trainer</span>
-        </a>
-        <nav style="display: flex; gap: 12px; align-items: center">
-          <a class="ghost" href="#servicos">Serviços</a>
-          <a class="ghost" href="#planos">Planos</a>
-          <a class="ghost" href="#contato">Contato</a>
-          <button
-            class="cta"
-            onclick="openWhatsApp('Olá! Quero saber mais sobre os treinos personalizados.')"
-          >
-            Fale no WhatsApp
-          </button>
-        </nav>
-      </div>
-    </header>
-
-    <!--
-    Teste AB
     -->
     <header>
       <div class="container nav">
@@ -715,19 +667,66 @@
         }
       });
     </script>
-    <!-- TESTE A/B DO HERO -->
+    <!-- TESTE A/B DO HERO - versão corrigida e persistente -->
+    <!-- TESTE A/B DO HERO - CORRIGIDO E PERSISTENTE -->
     <script>
-      window.addEventListener("DOMContentLoaded", () => {
-        const hero = document.querySelector(".hero h1");
-        const variation = Math.random() > 0.5 ? "A" : "B";
-        if (variation === "B") {
-          hero.textContent =
-            "Resultados rápidos, treinos inteligentes: seu personal trainer online e acessível.";
+      (function () {
+        const KEY = "lp_hero_variant";
+        // Lê variação existente ou escolhe e persiste
+        let variant = null;
+        try {
+          variant = localStorage.getItem(KEY);
+        } catch (e) {
+          console.warn("localStorage não disponível", e);
         }
-        gtag("event", "view_hero_ab", {
-          variation: variation,
-        });
-      });
+        if (!variant) {
+          variant = Math.random() > 0.5 ? "B" : "A";
+          try {
+            localStorage.setItem(KEY, variant);
+          } catch (e) {
+            /* ignore */
+          }
+        }
+
+        // DEBUG - remover em produção se quiser
+        console.info("[A/B] hero variant:", variant);
+
+        // Atualiza só o H1 dentro da .hero
+        const heroH1 = document.querySelector(".hero h1");
+        if (heroH1) {
+          if (variant === "B") {
+            heroH1.textContent =
+              "Resultados rápidos, treinos inteligentes: seu personal trainer online e acessível.";
+          } else {
+            // garante que A esteja no texto padrão (opcional)
+            // heroH1.textContent = 'Resultados reais com treinos personalizados';
+          }
+        } else {
+          console.warn("[A/B] .hero h1 não encontrado no DOM.");
+        }
+
+        // Envia evento ao GA uma única vez (se gtag existir)
+        if (typeof gtag === "function") {
+          try {
+            gtag("event", "view_hero_ab", { variation: variant });
+          } catch (e) {
+            console.warn("[A/B] erro ao enviar evento gtag", e);
+          }
+        } else {
+          // gtag pode ainda não estar pronto (por async); tentamos novamente em 500ms (1 tentativa)
+          setTimeout(() => {
+            if (typeof gtag === "function") {
+              try {
+                gtag("event", "view_hero_ab", { variation: variant });
+              } catch (e) {
+                console.warn("[A/B] retry gtag failed", e);
+              }
+            } else {
+              console.info("[A/B] gtag não disponível, evento não enviado.");
+            }
+          }, 500);
+        }
+      })();
     </script>
   </body>
 </html>
