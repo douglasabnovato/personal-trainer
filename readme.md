@@ -120,6 +120,14 @@ async function handleContact(e) {
 - Compatível com Formspree, sem necessidade de redirecionar.
 - Feedback visual imediato com ícone de sucesso (✅).
 
+#### ✅ Melhorias desta versão
+
+- Animação suave: modal aparece com fade-in e zoom, saindo com fade-out.
+- Fechamento automático: o modal desaparece após 5 segundos, garantindo que o usuário volte à navegação.
+- Botão “Fechar”: permite interação manual, caso o usuário queira fechar antes.
+- Experiência moderna: mantém a LP totalmente inline, sem redirecionamentos.
+- Visual consistente: cores, sombras e bordas seguem a identidade visual da landing page.
+
 ### 4️⃣ Evento de clique no WhatsApp (GA4)
 
 ```js
